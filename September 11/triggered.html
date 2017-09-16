@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Quoth the Giphy</title>
+</head>
+
+<body>
+  <div id="buttons">
+    <button data-person="arnold schwarzenegger">
+      I'll be back
+    </button>
+    <button data-person="michael j fox">
+      My happiness grows in direct proportion to my acceptance,
+      and in inverse proportion to my expectations.
+    </button>
+
+    <!-- STEP ONE: Open this file in the browser and click on the buttons. Watch what happens -->
+
+    <!-- STEP TWO: between the dashed lines below
+            * add three more buttons
+            * add a data-person attribute of famous people you know
+            * with a quote said by them -->
+
+    <!-- **************************************** -->
+
+    <!-- YOUR BUTTONS GO HERE!!!!!! Obviously delete this text after you put them between the dashed lines here.  -->
+
+    <!-- **************************************** -->
+
+
+    <!-- STEP THREE: open this file in the browser and click on your buttons. If they don't work, then fix your buttons -->
+
+    <!-- STEP FOUR: go over the JavaScript with your partners, and explain the lines of code to each other. -->
+
+  </div>
+
+  <div id="gifs-appear-here">
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+
+  //Think about what my api is what it needs to do, then code to accomodate all those possible needs
+  //Put constants and variables as parameters
+
+    // API
+    var api = {
+      baseUrl: 'http://api.giphy.com/v1/gifs/search',
+      queryParams: {
+        api_key: 'dc6zaTOxFJmzC',
+        limit: 10
+      },
+
+      /**
+       * Takes api properties and converts it into query string
+       * 
+       * @return {String}
+       */
+      toQueryString: function() {
+        var queryString = '';
+        for (var i in this.queryParams) {
+          queryString += '&' + i + '=' + this.queryParams[i];
+        }
+        //'http://api.giphy.com/v1/gifs/search' + ? + 'api_key=dc6zaTOxFJmzC&limit=10&q=cats'
+        return this.baseUrl + '?' + queryString.trim('&');
+      },
+
+      /**
+       * Ajax GET method to retrieve images
+       * 
+       * @param  {String}
+       * @param  {Int}
+       * @param  {Function}
+       * @return {void}
+       */
+      findImages: function(searchString, imageLimit, cb) {
+        this.queryParams.limit = parseInt(imageLimit);
+        this.queryParams.q = searchString;
+        $.ajax({
+          url: this.toQueryString(),
+          method: "GET"
+        })
+        .done(function(response) {
+          if (response.hasOwnProperty('data') && Array.isArray(response.data)) {
+            for (var i = 0; i < response.data.length; i++) {
+              cb(response.data[i].images.fixed_height.url, response.data[i].rating);
+            }
+          }
+        });
+      }
+    };
+
+
+    /**
+     * Takes in the data property of the button and passes it in as the search query
+     * 
+     * @param  {}
+     * @return {void}
+     */
+    $("button").on("click", function() {
+      var person = $(this).data("person").trim();
+      if (person.length) {
+        api.findImages(person, 3, function(img, rating) {
+          $('<div>')
+            .addClass('item')
+            .append(
+              $('<p>').text('Rating: ' + rating))
+            .append(
+              $('<img>').attr('src', img))
+            .appendTo('#gifs-appear-here')
+        });
+      }
+    });
+
+  </script>
+</body>
+
+</html>

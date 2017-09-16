@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>My First Object</title>
+  </head>
+  <body>
+
+    <script>
+
+      var car = {
+        make: "Honda",
+        model: "Fit",
+        color: "Blue Raspberry",
+        mileage: 3000,
+        isWorking: true,
+
+        driveToWork: function() {
+
+        	if(this.isWorking) {
+          alert("Old Mileage: " + this.mileage);
+
+          this.mileage = this.mileage + 8;
+
+          alert("New mileage: " + this.mileage);
+
+          this.reWriteStats();
+      }
+      else {
+      	alert("Your car needs a tune-up first!");
+      }
+        },
+
+        driveAroundWorld: function() {
+
+        	if(this.isWorking){
+          alert("Old Mileage: " + this.mileage);
+
+          this.mileage = this.mileage + 24000;
+
+          alert("New Mileage: " + this.mileage);
+          alert("Car needs a tuneup!");
+
+          this.isWorking = false;
+
+          this.reWriteStats();
+      }
+      else {
+      	alert("Your car needs a tune-up first!");
+      }
+        },
+
+        getTuneUp: function() {
+          alert("Car is ready to go!");
+          this.isWorking = true;
+
+          this.reWriteStats();
+        },
+
+        honk: function() {
+          alert("Honk! Honk!");
+
+          this.reWriteStats();
+        },
+
+        reWriteStats: function() {
+        	console.log(car.make);
+        	console.log(car.model);
+        	console.log(car.color);
+        	console.log(car.mileage);
+        	console.log(car.isWorking);
+        	console.log("----------------");
+        }
+      };
+
+      document.onkeyup = function(event) {
+      	var command = event.key;
+      	if(command === "q") {
+      		car.driveToWork();
+      	}
+
+      	if(command === "w") {
+      		car.driveAroundWorld();
+      	}
+
+      	if(command === "t") {
+      		car.getTuneUp();
+      	}
+
+      	if(command === "h") {
+      		car.honk();
+      	}
+      }
+
+    </script>
+    
+  </body>
+</html>

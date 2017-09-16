@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rock Paper Scissors</title>
+</head>
+<body>
+	<div>
+		<h1 id="rps">Press r, p, or s to play!</h1>
+	</div>
+
+	<script type="text/javascript">
+		var rps = ["r", "p", "s"];
+
+		document.onkeyup = function(event) {
+			var result = document.getElementById("rps");
+			var user = event.key;
+			var computer = rps[Math.floor(Math.random() * rps.length)];
+
+			if((user === "r") || (user ==="p") || (user === "s")){
+				if(user === "r") {
+					if(computer === "r") {
+						var text = "Computer chose rock. Tie!";
+					}
+					if(computer === "p") {
+						var text = "Computer chose paper. Computer wins!";
+					}
+					if(computer === "s") {
+						var text = "Computer chose scissors. You win!";
+					}
+				}
+				if(user === "p") {
+					if(computer === "r") {
+						var text = "Computer chose rock. You win!";
+					}
+					if(computer === "p") {
+						var text = "Computer chose paper. Tie!";
+					}
+					if(computer === "s") {
+						var text = "Computer chose scissors. Computer wins!";
+					}
+				}
+				if(user === "s") {
+					if(computer === "r") {
+						var text = "Computer chose rock. Computer wins!";
+					}
+					if(computer === "p") {
+						var text = "Computer chose paper. You win!";
+					}
+					if(computer === "s") {
+						var text = "Computer chose scissors. Tie!";
+					}
+				}
+			}
+			else{
+				var text = "Invalid choice! Press r, p, or s to play."
+			}
+
+			result.textContent = text;
+
+			// if((user === "r") || (user ==="p") || (user === "s")){
+			// 	if(user === "r") {
+			// 		if(computer === "r") {
+			// 			var text = "<h1>Computer chose rock. Tie!</h1>";
+			// 		}
+			// 		if(computer === "p") {
+			// 			var text = "<h1>Computer chose paper. Computer wins!</h1>";
+			// 		}
+			// 		if(computer === "s") {
+			// 			var text = "<h1>Computer chose scissors. You win!</h1>";
+			// 		}
+			// 	}
+			// 	if(user === "p") {
+			// 		if(computer === "r") {
+			// 			var text = "<h1>Computer chose rock. You win!</h1>";
+			// 		}
+			// 		if(computer === "p") {
+			// 			var text = "<h1>Computer chose paper. Tie!</h1>";
+			// 		}
+			// 		if(computer === "s") {
+			// 			var text = "<h1>Computer chose scissors. Computer wins!</h1>";
+			// 		}
+			// 	}
+			// 	if(user === "s") {
+			// 		if(computer === "r") {
+			// 			var text = "<h1>Computer chose rock. Computer wins!</h1>";
+			// 		}
+			// 		if(computer === "p") {
+			// 			var text = "<h1>Computer chose paper. You win!</h1>";
+			// 		}
+			// 		if(computer === "s") {
+			// 			var text = "<h1>Computer chose scissors. Tie!</h1>";
+			// 		}
+			// 	}
+			// }
+			// else{
+			// 	var text = "<h1>Invalid choice! Press r, p, or s to play.</h1>"
+			// }
+			//document.querySelector("#rps").innerHTML = text;
+		};
+	</script>
+</body>
+</html>

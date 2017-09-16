@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FizzBuzz</title>
+</head>
+<body>
+<script>
+
+for(i = 1; i < 10; i++) {
+	var str = "";
+	if(i % 2 == 0) {
+		str += "Fizz";
+	}
+	if(i % 3 == 0) {
+		str += "Buzz";
+	}
+	if(str === "") {
+		str = i;
+	}
+	console.log(str);
+}
+
+var files = [
+    "pavans_first_birthday.mov",
+    "owens_asleep_at_the_computer.jpg",
+    "michael_fights_a_polar_bear.mp4",
+    "nate_road_rage.avi",
+    "ruby_skydiving.jpeg",
+    "ken_getting_his_black_belt.png",
+    "dan_winning_underground_street_race.mov",
+    "its_hard_to_come_up_with_file_names.gif",
+    "seriously_this_is_taking_too_long.mpg",
+    "i_wonder_how_many_of_these_i_should_have.png",
+    "probably_a_few_more.avi",
+    "nutmeg_is_clawing_my_sneakers_again.mp4",
+    "cat_i_will_destroy_you.gif",
+    "i_wish_we_had_a_dog.jpeg",
+    "stop_looking_at_me_like_that_nutmeg.mpeg",
+    "aww_i_cant_hate_you.png",
+    "omg_my_sneakers.avi",
+    "cat_you_are_the_worst.mp4"
+  ];
+//For loop for length of files
+//at i, 
+var videos = [];
+var photos = [];
+var videoTypes = ["mov", "avi", "mpeg", "mp4", "mpg"];
+var photoTypes = ["jpg", "jpeg", "gif", "png"];
+
+for(i = 0; i < files.length; i++) {
+	var fileAtHand = files[i].split(".");
+	var fileType = fileAtHand[fileAtHand.length - 1];
+	if(videoTypes.indexOf(fileType) !== -1) {
+		videos.push(files[i]);
+	}
+	if(photoTypes.indexOf(fileType) !== -1) {
+		photos.push(files[i]);
+	}
+}
+console.log(videos);
+console.log(photos);
+
+var stockPrices = [1.32, 1.14, 1.45, 1.20, 1.34, 1.74, 1.18, 1.90, 1.1];
+
+var biggestProfit = function(stockArray, sharesBought) {
+
+  // Check to make sure stock array is greater than 2
+  if (stockArray.length > 2) {
+
+    // Set initial minPrice, you cant buy any earlier than the first value
+    var minPrice = stockArray[0];
+
+    // Set initial max profit, your first opportunity to sell is the second number
+    var maxProfit = stockArray[1] - stockArray[0];
+
+    // Loops over the array, skipping the first value, since its already the minPrice and we can't sell when we buy
+    for (var i = 1; i < stockArray.length; i++) {
+
+      // Temp hold the current price in a variable
+      var currentPrice = stockArray[i];
+
+      // Potential profit is the current price minus the minPrice
+      var potentialProfit = currentPrice - minPrice;
+
+      // If maxProfit is less than the current potential profit, update the maxProfit
+      if (maxProfit < potentialProfit) {
+        maxProfit = potentialProfit;
+      }
+
+      // If minPrice is more than the currentPrice, update the minPrice
+      if (minPrice > currentPrice) {
+        minPrice = currentPrice;
+      }
+    }
+
+    // Multiply the maxProfit by the number of shares to get the total
+    return maxProfit * sharesBought;
+  }
+  else {
+
+   //  Error if the array has 2 or less prices in it
+    console.log("Error, you need at least 2 prices");
+  }
+};
+
+</script>
+
+</body>
+</html>
